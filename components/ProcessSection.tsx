@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import React, { useState } from "react";
 
 /**
  * ProcessSection — Stacking cards scroll effect
@@ -108,7 +108,7 @@ function WrenchIcon() {
   );
 }
 
-const iconMap: Record<string, () => JSX.Element> = {
+const iconMap: Record<string, () => React.ReactElement> = {
   telescope: TelescopeIcon,
   lightbulb: LightbulbIcon,
   wrench: WrenchIcon,
