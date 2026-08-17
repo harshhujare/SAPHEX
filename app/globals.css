@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+@source "../components/**/*.{ts,tsx}";
+@source "../app/**/*.{ts,tsx}";
+
+/* ---- Design Tokens ---- */
+:root {
+  --bg-primary: #05050f;
+  --bg-surface: #0d0d1a;
+  --bg-card: #111126;
+  --accent: oklch(73% 0.18 255); /* iridescent blue */
+  --accent-glow: rgba(80, 130, 255, 0.25);
+  --accent-cyan: oklch(80% 0.15 200);
+  --accent-purple: oklch(60% 0.22 295);
+  --text-primary: #f0f0f8;
+  --text-secondary: #8888aa;
+  --text-muted: #44445a;
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.14);
+  --radius: 16px;
+  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ---- Base ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Custom cursor styles are injected by components/CustomCursor.tsx */
+
+/* ---- Typography ---- */
+.font-display {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+.font-body { font-family: 'Inter', sans-serif; }
+
+/* ---- Utility ---- */
+.container-leos {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 5vw;
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+.section-label::before {
+  content: '';
+  width: 3px;
+  height: 14px;
+  background: #5080ff;
+  border-radius: 2px;
+  display: block;
+}
+
+/* ---- Glow Effect ---- */
+.glow-blue {
+  filter: drop-shadow(0 0 40px rgba(80,130,255,0.4));
+}
+
+/* ---- Marquee ---- */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 28s linear infinite;
+  will-change: transform;
+}
+.marquee-track:hover { animation-play-state: paused; }
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 2px; }
+
+/* ---- Selection ---- */
+::selection { background: rgba(80,130,255,0.3); color: #fff; }
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---- Touch device: restore default cursor ---- */
+@media (pointer: coarse) {
+  body { cursor: default; }
+  a, button { cursor: pointer; }
+}
+
+/* ---- Responsive container ---- */
+@media (max-width: 480px) {
+  .container-leos { padding: 0 4vw; }
+  .hidden-mobile { display: none !important; }
+}
