@@ -236,18 +236,6 @@ export default function AeosNavbar() {
           }}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
         >
-          {/* White circle background on hover (only in hamburger state) */}
-          <span
-            style={{
-              position: "absolute",
-              inset: 0,
-              borderRadius: "50%",
-              background: "#f0ede0",
-              transform: hamburgerHovered && !menuOpen ? "scale(1)" : "scale(0)",
-              transition,
-              opacity: hamburgerHovered && !menuOpen ? 1 : 0,
-            }}
-          />
 
           {menuOpen ? (
             /* ── Close icon: × ── */
@@ -265,7 +253,7 @@ export default function AeosNavbar() {
                 style={{
                   position: "absolute",
                   width: 20,
-                  height: 1.5,
+                  height: 2,
                   background: "#f0ede0",
                   transform: "rotate(45deg)",
                   borderRadius: 1,
@@ -275,7 +263,7 @@ export default function AeosNavbar() {
                 style={{
                   position: "absolute",
                   width: 20,
-                  height: 1.5,
+                  height: 2,
                   background: "#f0ede0",
                   transform: "rotate(-45deg)",
                   borderRadius: 1,
@@ -301,44 +289,44 @@ export default function AeosNavbar() {
                   top: 0,
                   left: 0,
                   width: 28,
-                  height: 1,
-                  background: hamburgerHovered ? "#1a1a1a" : "#f0ede0",
-                  borderRadius: 0.5,
+                  height: 2,
+                  background: "#f0ede0",
+                  borderRadius: 1,
                   transition,
                   transformOrigin: "right center",
                   transform: hamburgerHovered
-                    ? "translateY(6.5px) rotate(-25deg)"
+                    ? "translateY(6px) rotate(-25deg)"
                     : "translateY(0) rotate(0deg)",
                 }}
               />
-              {/* Middle line — fades out on hover (the SVG taper is the real middle line) */}
+              {/* Middle line — stays visible to form the shaft of the arrow */}
               <span
                 style={{
                   position: "absolute",
-                  top: 6.5,
+                  top: 6,
                   left: 0,
                   width: 28,
-                  height: 1,
-                  background: hamburgerHovered ? "#1a1a1a" : "#f0ede0",
-                  borderRadius: 0.5,
+                  height: 2,
+                  background: "#f0ede0",
+                  borderRadius: 1,
                   transition,
-                  opacity: hamburgerHovered ? 0 : 1,
+                  opacity: 1,
                 }}
               />
               {/* Bottom line — on hover: move up to center + rotate down from right = bottom arm of > */}
               <span
                 style={{
                   position: "absolute",
-                  top: 13,
+                  top: 12,
                   left: 0,
                   width: 28,
-                  height: 1,
-                  background: hamburgerHovered ? "#1a1a1a" : "#f0ede0",
-                  borderRadius: 0.5,
+                  height: 2,
+                  background: "#f0ede0",
+                  borderRadius: 1,
                   transition,
                   transformOrigin: "right center",
                   transform: hamburgerHovered
-                    ? "translateY(-6.5px) rotate(25deg)"
+                    ? "translateY(-6px) rotate(25deg)"
                     : "translateY(0) rotate(0deg)",
                 }}
               />
@@ -372,12 +360,12 @@ export default function AeosNavbar() {
               <stop offset="100%" stopColor="rgba(240,237,224,0.75)" />
             </linearGradient>
           </defs>
-          {/* Triangle polygon: needle point at logo, 3px tall at hamburger end (matches line weight) */}
+          {/* Triangle polygon: needle point at logo, 2px tall at hamburger end (matches line weight) */}
           <polygon
             points={[
               `${lineGeometry.logoRight},${lineGeometry.linesCenterY}`,
-              `${lineGeometry.linesLeft},${lineGeometry.linesCenterY - 0.75}`,
-              `${lineGeometry.linesLeft},${lineGeometry.linesCenterY + 0.75}`,
+              `${lineGeometry.linesLeft},${lineGeometry.linesCenterY - 1}`,
+              `${lineGeometry.linesLeft},${lineGeometry.linesCenterY + 1}`,
             ].join(" ")}
             fill="url(#taper-grad)"
           />

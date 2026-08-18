@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
+import SmoothScrolling from "@/components/SmoothScrolling";
 
 export const metadata: Metadata = {
   title: "SAPHEX Labs — Magic as a Service",
@@ -30,8 +31,10 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <CustomCursor />
-        {children}
+        <SmoothScrolling>
+          <CustomCursor />
+          {children}
+        </SmoothScrolling>
       </body>
     </html>
   );

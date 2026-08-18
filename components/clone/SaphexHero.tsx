@@ -476,7 +476,7 @@ export default function SaphexHero() {
               fontFamily: "'Cormorant Garamond', serif",
               fontStyle: "italic",
               fontWeight: 400,
-              fontSize: "clamp(96px, 20vw, 200px)",
+              fontSize: "clamp(120px, 20vw, 200px)",
               color: "#f0ede0",
               letterSpacing: "-0.02em",
               lineHeight: 1,
@@ -491,7 +491,7 @@ export default function SaphexHero() {
             style={{
               fontFamily: "'Cormorant Garamond', serif",
               fontWeight: 400,
-              fontSize: "clamp(24px, 4vw, 40px)",
+              fontSize: "clamp(32px, 6vw, 48px)",
               color: "#ddd8c8",
               letterSpacing: "0.12em",
               marginTop: "0.2em",

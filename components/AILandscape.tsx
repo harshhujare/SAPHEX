@@ -108,7 +108,7 @@ export default function AILandscape() {
             style={{
               position: "absolute",
               inset: 0,
-              background: "rgba(0, 0, 0, 0.28)",
+              background: "rgba(0, 0, 0, 0.45)",
               pointerEvents: "none",
             }}
           />
@@ -132,14 +132,14 @@ export default function AILandscape() {
                 fontFamily: "'Cormorant Garamond', serif",
                 fontStyle: "italic",
                 fontWeight: 400,
-                fontSize: "clamp(1.1rem, 3vw, 2.25rem)",
+                fontSize: "clamp(2.1rem, 5vw, 3.5rem)",
                 color: "#ffffff",
                 textAlign: "center",
-                lineHeight: 1.4,
+                lineHeight: 1.3,
                 letterSpacing: "-0.01em",
                 textShadow:
-                  "0 2px 24px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.4)",
-                maxWidth: 760,
+                  "0 4px 32px rgba(0,0,0,0.8), 0 2px 8px rgba(0,0,0,0.6)",
+                maxWidth: 860,
               }}
             >
               The AI landscape is changing fast — we&apos;ll stay on top of it
