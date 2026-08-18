@@ -12,7 +12,7 @@ export default function Footer() {
           >
             SAPHEX LABS
           </span>
-          <span className="text-xs ml-4" style={{ color: "var(--text-muted)" }}>
+          <span className="text-sm ml-4" style={{ color: "var(--text-muted)" }}>
             © {year} SAPHEX Labs. All rights reserved.
           </span>
         </div>
@@ -23,7 +23,7 @@ export default function Footer() {
             <a
               key={item}
               href="#"
-              className="text-xs hover:text-white transition-colors duration-200"
+              className="text-sm hover:text-white transition-colors duration-200"
               style={{ color: "var(--text-muted)", letterSpacing: "0.05em" }}
             >
               {item}
@@ -37,7 +37,7 @@ export default function Footer() {
             className="w-1.5 h-1.5 rounded-full"
             style={{ background: "#40c8a0", boxShadow: "0 0 6px rgba(64,200,160,0.8)" }}
           />
-          <span className="text-xs" style={{ color: "var(--text-muted)" }}>
+          <span className="text-sm" style={{ color: "var(--text-muted)" }}>
             All systems operational
           </span>
         </div>

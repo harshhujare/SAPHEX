@@ -59,12 +59,12 @@ body {
 .section-label {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 11px;
-  letter-spacing: 0.15em;
+  gap: 12px;
+  font-size: 14px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-secondary);
-  font-weight: 500;
+  font-weight: 600;
 }
 .section-label::before {
   content: '';

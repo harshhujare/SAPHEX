@@ -167,9 +167,9 @@ export default function ProcessSection() {
 
         .process-step-label {
           font-family: 'Inter', sans-serif;
-          font-size: 14px;
-          font-weight: 400;
-          color: rgba(255,255,255,0.45);
+          font-size: clamp(14px, 1.2vw, 16px);
+          font-weight: 500;
+          color: rgba(255,255,255,0.6);
           margin-bottom: 12px;
         }
 
@@ -218,8 +218,8 @@ export default function ProcessSection() {
           cursor: pointer;
           color: rgba(255,255,255,0.85);
           font-family: 'Inter', sans-serif;
-          font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-          font-weight: 400;
+          font-size: clamp(1.1rem, 1.5vw, 1.25rem);
+          font-weight: 500;
           text-align: left;
           transition: color 0.2s;
         }
@@ -249,9 +249,9 @@ export default function ProcessSection() {
         .process-accordion-content p {
           padding: 0 0 20px;
           font-family: 'Inter', sans-serif;
-          font-size: 14px;
+          font-size: clamp(16px, 1.2vw, 18px);
           line-height: 1.7;
-          color: rgba(255,255,255,0.5);
+          color: rgba(255,255,255,0.7);
           max-width: 600px;
         }
 

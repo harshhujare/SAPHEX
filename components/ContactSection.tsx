@@ -85,7 +85,7 @@ export default function ContactSection() {
           border-radius: 8px;
           padding: 14px 16px;
           font-family: 'Inter', sans-serif;
-          font-size: 14px;
+          font-size: 16px;
           color: #fff;
           outline: none;
           transition: border-color 0.2s;
@@ -114,8 +114,8 @@ export default function ContactSection() {
           border: none;
           border-radius: 8px;
           font-family: 'Inter', sans-serif;
-          font-size: 14px;
-          font-weight: 500;
+          font-size: 16px;
+          font-weight: 600;
           letter-spacing: 0.01em;
           cursor: pointer;
           transition: opacity 0.2s, transform 0.2s;
@@ -128,13 +128,13 @@ export default function ContactSection() {
         .contact-label {
           display: flex;
           align-items: center;
-          gap: 8px;
+          gap: 12px;
           font-family: 'Inter', sans-serif;
-          font-size: 11px;
-          font-weight: 500;
-          letter-spacing: 0.12em;
+          font-size: 14px;
+          font-weight: 600;
+          letter-spacing: 0.1em;
           text-transform: uppercase;
-          color: rgba(255,255,255,0.5);
+          color: rgba(255,255,255,0.6);
           margin-bottom: 16px;
         }
         .contact-label-bar {
@@ -227,10 +227,10 @@ export default function ContactSection() {
             </h2>
             <p
               style={{
-                fontSize: 13,
+                fontSize: "clamp(16px, 1.2vw, 18px)",
                 lineHeight: 1.65,
-                color: "rgba(255,255,255,0.7)",
-                maxWidth: 280,
+                color: "rgba(255,255,255,0.8)",
+                maxWidth: 320,
               }}
             >
               Dive into the future with SAPHEX Labs. Get in touch and build out
@@ -279,7 +279,7 @@ export default function ContactSection() {
               >
                 Enquiry Sent!
               </p>
-              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)" }}>
+              <p style={{ fontSize: "clamp(14px, 1vw, 16px)", color: "rgba(255,255,255,0.7)" }}>
                 We&apos;ll get back to you within 24 hours.
               </p>
             </div>

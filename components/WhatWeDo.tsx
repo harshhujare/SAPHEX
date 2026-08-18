@@ -74,7 +74,7 @@ export default function WhatWeDo() {
           cursor: pointer;
           transition: color 0.25s;
           font-family: 'Inter', sans-serif;
-          font-size: clamp(0.875rem, 1.5vw, 1.05rem);
+          font-size: clamp(1rem, 1.5vw, 1.25rem);
           font-weight: 400;
           color: #6b6b6b;
           letter-spacing: -0.01em;
@@ -124,12 +124,12 @@ export default function WhatWeDo() {
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: 8,
-                  fontSize: 11,
-                  letterSpacing: "0.15em",
+                  gap: 12,
+                  fontSize: 14,
+                  letterSpacing: "0.1em",
                   textTransform: "uppercase",
-                  color: "#888",
-                  fontWeight: 500,
+                  color: "#666",
+                  fontWeight: 600,
                   marginBottom: "clamp(1.5rem, 3vw, 2.5rem)",
                 }}
               >
@@ -177,10 +177,10 @@ export default function WhatWeDo() {
 
               <p
                 style={{
-                  fontSize: 13,
+                  fontSize: "clamp(16px, 1.2vw, 18px)",
                   lineHeight: 1.7,
-                  color: "#666",
-                  maxWidth: 340,
+                  color: "#555",
+                  maxWidth: 380,
                   marginBottom: "clamp(2rem, 4vw, 3rem)",
                 }}
                 className="wwd-desc-para"
@@ -211,10 +211,11 @@ export default function WhatWeDo() {
             <p
               style={{
                 marginTop: 32,
-                fontSize: 11,
+                fontSize: "clamp(12px, 1vw, 14px)",
                 letterSpacing: "0.08em",
-                color: "#bbb",
+                color: "#888",
                 textTransform: "uppercase",
+                fontWeight: 500,
               }}
             >
               Engineering-first. Results-obsessed.
@@ -272,9 +273,9 @@ export default function WhatWeDo() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.18 }}
                     style={{
-                      fontSize: "clamp(0.8rem, 1.2vw, 0.9rem)",
+                      fontSize: "clamp(1rem, 1.2vw, 1.125rem)",
                       lineHeight: 1.65,
-                      color: "rgba(255,255,255,0.82)",
+                      color: "rgba(255,255,255,0.9)",
                       maxWidth: 560,
                     }}
                   >

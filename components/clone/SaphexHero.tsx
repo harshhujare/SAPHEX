@@ -547,7 +547,7 @@ export default function SaphexHero() {
                 style={{
                   fontFamily: "'Instrument Sans', sans-serif",
                   fontWeight: 400,
-                  fontSize: "clamp(12px, 1.1vw, 16px)",
+                  fontSize: "clamp(16px, 1.5vw, 20px)",
                   lineHeight: 1.55,
                   color: "#ede9d8",
                   margin: 0,
@@ -573,8 +573,8 @@ export default function SaphexHero() {
                 style={{
                   fontFamily: "'Instrument Sans', sans-serif",
                   fontWeight: 300,
-                  fontSize: "clamp(10px, 0.82vw, 12px)",
-                  color: "rgba(237,233,216,0.38)",
+                  fontSize: "clamp(14px, 1vw, 16px)",
+                  color: "rgba(237,233,216,0.6)",
                   margin: "5px 0 0",
                 }}
               >
