@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useEffect, useState, Suspense } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useRef, useEffect, useState, useCallback, Suspense } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import AeosNavbar from "./AeosNavbar";
 import { RoundedBox } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
@@ -53,7 +53,7 @@ function GlassCard({
   const w = SEED_WIDTHS[index] * sizeFactor;
   const h = SEED_HEIGHTS[index] * sizeFactor;
 
-  useFrame(({ clock }) => {
+  useFrame(({ clock, invalidate }) => {
     if (!ref.current) return;
     const t = clock.getElapsedTime();
 
@@ -87,6 +87,9 @@ function GlassCard({
       ref.current.rotation.y = baseRotY;
       ref.current.rotation.z = baseRotZ;
     }
+
+    // Request next frame (needed for "demand" frameloop)
+    invalidate();
   });
 
   return (
@@ -140,7 +143,7 @@ function CardCluster({
 }) {
   const groupRef = useRef<THREE.Group>(null);
 
-  useFrame(() => {
+  useFrame(({ invalidate }) => {
     if (!groupRef.current) return;
     if (!enableMouseFollow || !mouseRef.current) return;
 
@@ -158,6 +161,8 @@ function CardCluster({
       targetY,
       0.03
     );
+
+    invalidate();
   });
 
   return (
@@ -177,13 +182,29 @@ function CardCluster({
   );
 }
 
+// ─── Render loop controller — pauses when hero is not visible ─────────────────
+function RenderController({ isVisible }: { isVisible: boolean }) {
+  const { invalidate } = useThree();
+
+  useEffect(() => {
+    if (isVisible) {
+      // Kick-start the render loop when becoming visible
+      invalidate();
+    }
+  }, [isVisible, invalidate]);
+
+  return null;
+}
+
 // ─── Three.js Scene ───────────────────────────────────────────────────────────
 function Scene({
   mouseRef,
   isMobile,
+  isVisible,
 }: {
   mouseRef: React.RefObject<{ x: number; y: number }>;
   isMobile: boolean;
+  isVisible: boolean;
 }) {
   const cardCount = isMobile ? 5 : 10;
   const sizeFactor = isMobile ? 0.6 : 1;
@@ -199,10 +220,14 @@ function Scene({
         alpha: true,
         toneMapping: THREE.ACESFilmicToneMapping,
         toneMappingExposure: 1.1,
+        powerPreference: "high-performance",
       }}
       style={{ background: "transparent" }}
-      dpr={isMobile ? [1, 1] : [1, 2]}
+      dpr={isMobile ? [1, 1] : [1, 1.5]}
+      frameloop="demand"
     >
+      <RenderController isVisible={isVisible} />
+
       {/* Minimal ambient — dark void aesthetic */}
       <ambientLight intensity={0.02} />
 
@@ -253,7 +278,22 @@ function TalkToUsBadge({ size = 96 }: { size?: number }) {
   const radius = size * 0.4375; // 42/96 ratio preserved
   const fontSize = size * 0.0885; // 8.5/96 ratio preserved
   return (
-    <div style={{ position: "relative", width: size, height: size, flexShrink: 0 }}>
+    <a
+      href="#contact"
+      data-spotlight
+      style={{
+        position: "relative",
+        width: size,
+        height: size,
+        flexShrink: 0,
+        display: "block",
+        cursor: "pointer",
+        textDecoration: "none",
+        transition: "transform 0.2s ease",
+      }}
+      onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
+      onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+    >
       <div
         style={{
           position: "absolute",
@@ -304,14 +344,16 @@ function TalkToUsBadge({ size = 96 }: { size?: number }) {
       >
         →
       </div>
-    </div>
+    </a>
   );
 }
 
 // ─── Root export ──────────────────────────────────────────────────────────────
 export default function SaphexHero() {
   const mouseRef = useRef({ x: 0, y: 0 });
+  const heroRef = useRef<HTMLElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [isHeroVisible, setIsHeroVisible] = useState(true);
 
   useEffect(() => {
     /* Detect mobile / touch device */
@@ -329,9 +371,21 @@ export default function SaphexHero() {
     };
     window.addEventListener("mousemove", onMove);
 
+    /* IntersectionObserver — pause WebGL when hero is offscreen */
+    const heroEl = heroRef.current;
+    let observer: IntersectionObserver | null = null;
+    if (heroEl) {
+      observer = new IntersectionObserver(
+        ([entry]) => setIsHeroVisible(entry.isIntersecting),
+        { threshold: 0, rootMargin: "100px" }
+      );
+      observer.observe(heroEl);
+    }
+
     return () => {
       mq.removeEventListener("change", handler);
       window.removeEventListener("mousemove", onMove);
+      observer?.disconnect();
     };
   }, []);
 
@@ -350,6 +404,7 @@ export default function SaphexHero() {
       `}</style>
 
       <main
+        ref={heroRef}
         style={{
           width: "100vw",
           height: "100vh",
@@ -378,7 +433,7 @@ export default function SaphexHero() {
 
         {/* 3D Canvas — full viewport */}
         <div style={{ position: "absolute", inset: 0, zIndex: 1 }}>
-          <Scene mouseRef={mouseRef} isMobile={isMobile} />
+          <Scene mouseRef={mouseRef} isMobile={isMobile} isVisible={isHeroVisible} />
         </div>
 
         {/* Invisible spotlight-trigger overlay — sits above canvas, covers hero text zone.
@@ -386,6 +441,7 @@ export default function SaphexHero() {
             which would otherwise swallow all mouseover events. */}
         {!isMobile && (
           <div
+            data-spotlight
             onMouseEnter={() => window.dispatchEvent(new CustomEvent("cursor:spotlight"))}
             onMouseLeave={() => window.dispatchEvent(new CustomEvent("cursor:normal"))}
             style={{
@@ -420,7 +476,7 @@ export default function SaphexHero() {
               fontFamily: "'Cormorant Garamond', serif",
               fontStyle: "italic",
               fontWeight: 400,
-              fontSize: "clamp(48px, 12vw, 160px)",
+              fontSize: "clamp(96px, 20vw, 200px)",
               color: "#f0ede0",
               letterSpacing: "-0.02em",
               lineHeight: 1,
@@ -435,7 +491,7 @@ export default function SaphexHero() {
             style={{
               fontFamily: "'Cormorant Garamond', serif",
               fontWeight: 400,
-              fontSize: "clamp(14px, 2.5vw, 32px)",
+              fontSize: "clamp(24px, 4vw, 40px)",
               color: "#ddd8c8",
               letterSpacing: "0.12em",
               marginTop: "0.2em",
@@ -525,7 +581,7 @@ export default function SaphexHero() {
                 Based in Bangalore, India. Tinkering since 2022.
               </p>
             </div>
-            <TalkToUsBadge size={badgeSize} />
+            {!isMobile && <TalkToUsBadge size={badgeSize} />}
           </div>
         </div>
       </main>

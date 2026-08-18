@@ -42,7 +42,7 @@ export default function WhatWeDo() {
       id="what-we-do"
       style={{
         background: "#06060c",
-        padding: "0 5vw 6rem",
+        padding: "0 2vw 4rem",
       }}
     >
       <style>{`
@@ -50,7 +50,7 @@ export default function WhatWeDo() {
         .wwd-grid {
           display: grid;
           grid-template-columns: 2fr 3fr;
-          min-height: 580px;
+          min-height: 420px;
           border-radius: 20px;
           overflow: hidden;
           box-shadow: 0 40px 120px rgba(0,0,0,0.5);
@@ -105,8 +105,7 @@ export default function WhatWeDo() {
         }
       `}</style>
 
-      <div className="container-leos">
-        <div className="wwd-grid">
+        <div className="wwd-grid" style={{ maxWidth: "100%" }}>
 
           {/* ── Left panel: off-white ── */}
           <div
@@ -287,7 +286,6 @@ export default function WhatWeDo() {
           </div>
 
         </div>
-      </div>
     </section>
   );
 }

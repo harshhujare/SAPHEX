@@ -178,7 +178,11 @@ export default function AeosNavbar() {
           display: "flex",
           alignItems: "flex-start",
           justifyContent: "space-between",
-          padding: isMobile ? "16px 16px 0" : "22px 28px 0",
+          padding: isMobile ? "16px 16px 16px" : "22px 28px 18px",
+          background: "rgba(5, 5, 15, 0.45)",
+          backdropFilter: "blur(16px)",
+          WebkitBackdropFilter: "blur(16px)",
+          borderBottom: "1px solid rgba(240,237,224,0.06)",
         }}
       >
         {/* ── Logo ── */}
@@ -348,7 +352,7 @@ export default function AeosNavbar() {
           all the way to the logo). The polygon is thick (1px) at the hamburger
           end and tapers to a needle-sharp point at the logo end.
           ════════════════════════════════════════════════════════════════════════ */}
-      {!menuOpen && !isMobile && (
+      {!menuOpen && (
         <svg
           style={{
             position: "fixed",
@@ -356,7 +360,7 @@ export default function AeosNavbar() {
             left: 0,
             width: "100vw",
             height: 70,
-            zIndex: 99,
+            zIndex: 101,
             pointerEvents: "none",
           }}
         >
@@ -380,22 +384,7 @@ export default function AeosNavbar() {
         </svg>
       )}
 
-      {/* ════════════════════════════════════════════════════════════════════════
-          HORIZONTAL RULE below navbar
-          ════════════════════════════════════════════════════════════════════════ */}
-      {!menuOpen && (
-        <div
-          style={{
-            position: "fixed",
-            top: 66,
-            left: 0,
-            right: 0,
-            height: 1,
-            background: "rgba(240,237,224,0.09)",
-            zIndex: 99,
-          }}
-        />
-      )}
+
 
       {/* ════════════════════════════════════════════════════════════════════════
           FULLSCREEN MENU OVERLAY (glassmorphism)

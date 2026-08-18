@@ -81,7 +81,7 @@ export default function AILandscape() {
             height,
             borderRadius,
             overflow: "hidden",
-            willChange: "width, height, border-radius",
+            willChange: "transform",
           }}
         >
           {/* ── Looping background video ── */}

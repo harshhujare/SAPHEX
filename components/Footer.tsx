@@ -10,10 +10,10 @@ export default function Footer() {
             className="font-display text-lg tracking-[0.3em] text-white uppercase"
             style={{ letterSpacing: "0.3em" }}
           >
-            LEOS
+            SAPHEX LABS
           </span>
           <span className="text-xs ml-4" style={{ color: "var(--text-muted)" }}>
-            © {year} LEOS. All rights reserved.
+            © {year} SAPHEX Labs. All rights reserved.
           </span>
         </div>
 

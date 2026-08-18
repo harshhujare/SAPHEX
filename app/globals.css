@@ -99,6 +99,17 @@ body {
 /* ---- Selection ---- */
 ::selection { background: rgba(80,130,255,0.3); color: #fff; }
 
+/* ---- Offscreen rendering optimisation ---- */
+/* content-visibility:auto lets the browser skip layout/paint for sections
+   that are outside the viewport. contain-intrinsic-size gives a placeholder
+   height so scrollbar doesn't jump. */
+#what-we-do,
+#process,
+#contact {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 100vh;
+}
+
 /* ---- Reduced motion ---- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

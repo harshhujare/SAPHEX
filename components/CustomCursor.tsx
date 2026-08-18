@@ -57,12 +57,19 @@ export default function CustomCursor() {
     };
 
     // ── RAF loop: smooth-follow the spotlight ──
+    // Only repaint when there's meaningful movement to reduce compositor work during scroll
     const loop = () => {
-      pos.fx += (pos.mx - pos.fx) * 0.1;
-      pos.fy += (pos.my - pos.fy) * 0.1;
-      if (spotRef.current) {
-        spotRef.current.style.left = pos.fx + "px";
-        spotRef.current.style.top  = pos.fy + "px";
+      const dx = pos.mx - pos.fx;
+      const dy = pos.my - pos.fy;
+
+      // Skip repaint when cursor is essentially settled (< 0.5px delta)
+      if (Math.abs(dx) > 0.5 || Math.abs(dy) > 0.5) {
+        pos.fx += dx * 0.1;
+        pos.fy += dy * 0.1;
+        if (spotRef.current) {
+          spotRef.current.style.left = pos.fx + "px";
+          spotRef.current.style.top  = pos.fy + "px";
+        }
       }
       rafRef.current = requestAnimationFrame(loop);
     };
